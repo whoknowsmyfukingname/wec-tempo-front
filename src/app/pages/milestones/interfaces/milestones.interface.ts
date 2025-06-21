@@ -2,7 +2,7 @@ export interface Milestone {
     position: number;
     title: string;
     status: Status;
-    completedDate?: string
+    completedDate?: Date
     features: Feature[];
 }
 
