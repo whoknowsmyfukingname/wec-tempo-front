@@ -5,6 +5,7 @@ export const milestones: Milestone[] = [
         position: 0,
         title: 'wec-tempo V.0.1',
         status: Status.DEVELOP,
+        completedDate: new Date('2025-6-21'),
         features: [
             {
                 type: FeatType.DATABASE,
