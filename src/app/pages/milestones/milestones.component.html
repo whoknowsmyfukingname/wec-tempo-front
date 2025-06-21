@@ -1,0 +1,63 @@
+<div class="flex flex-col py-3">
+    <p-accordion value="0">
+        @for (milestone of milestones; track milestone.position) {
+            <p-accordion-panel [value]="milestone.position">
+                <p-accordion-header>{{ milestone.title }}</p-accordion-header>
+                 <p-accordion-content>
+                     <p-progressbar [value]="getProgress(milestone.position)" />
+                     <div class="grid grid-cols-3 gap-3 pt-4">
+                        <div class="flex flex-col">
+                            <span class="title self-center">Database</span>
+                            @for (feature of milestone.features; track feature.title) {
+                                @if (feature.type === featTypeDatabase) {
+                                    <p-card [header]="feature.title">
+                                            <ul>
+                                                @for (task of feature.tasks; track task.title) {
+                                                    <li [ngClass]="{'done': task.status === completedStatus}">
+                                                        <span>{{ task.title }}</span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                    </p-card>
+                                }
+                            }
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="title self-center">Backend</span>
+                            @for (feature of milestone.features; track feature.title) {
+                                @if (feature.type === featTypeBack) {
+                                    <p-card [header]="feature.title">
+                                            <ul>
+                                                @for (task of feature.tasks; track task.title) {
+                                                    <li [ngClass]="{'done': task.status === completedStatus}">
+                                                        <span>{{ task.title }}</span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                    </p-card>
+                                }
+                            }
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="title self-center">Frontend</span>
+                            @for (feature of milestone.features; track feature.title) {
+                                @if (feature.type === featTypeFront) {
+                                    <p-card [header]="feature.title">
+                                            <ul>
+                                                @for (task of feature.tasks; track task.title) {
+                                                    <li [ngClass]="{'done': task.status === completedStatus}">
+                                                        <span>{{ task.title }}</span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                    </p-card>
+                                }
+                            }
+                        </div>
+                     </div>
+                     <span class="justify-self-start" style="color: var(--p-neutral-600);">Released on: {{ milestone.completedDate | date : 'MMM dd, yyyy' }}</span>
+                 </p-accordion-content>
+            </p-accordion-panel>
+        }
+    </p-accordion>
+</div>
