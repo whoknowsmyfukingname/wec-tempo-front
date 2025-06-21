@@ -1,0 +1,6 @@
+.gray-text {
+    color: var(--p-neutral-600);
+    &:hover {
+        color: var(--p-neutral-400);
+    }
+}

@@ -1,0 +1,13 @@
+li {
+    list-style-type: disc;
+}
+
+.done {
+    text-decoration: line-through;
+    color: var(--p-neutral-500);
+}
+
+.title {
+    font-weight: bold;
+    font-size: 2rem;
+}
