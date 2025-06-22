@@ -4,12 +4,10 @@ export const milestones: Milestone[] = [
     {
         position: 0,
         title: 'wec-tempo V.0.1',
-        status: Status.DEVELOP,
         completedDate: new Date('2025-6-21'),
         features: [
             {
                 type: FeatType.DATABASE,
-                status: Status.DEVELOP,
                 title: 'Start database',
                 tasks: [
                     {
@@ -24,7 +22,6 @@ export const milestones: Milestone[] = [
             },
             {
                 type: FeatType.BACKEND,
-                status: Status.DEVELOP,
                 title: 'Start backend',
                 tasks: [
                     {
@@ -39,7 +36,6 @@ export const milestones: Milestone[] = [
             },
             {
                 type: FeatType.FRONTEND,
-                status: Status.DEVELOP,
                 title: 'Start fontend',
                 tasks: [
                     {
@@ -61,19 +57,17 @@ export const milestones: Milestone[] = [
     {
         position: 1,
         title: 'wec-tempo V.0.2',
-        status: Status.PENDING,
         features: [
             {
                 title: 'Create events table',
                 type: FeatType.DATABASE,
-                status: Status.PENDING,
                 tasks: [
                     {
-                        status: Status.PENDING,
+                        status: Status.DONE,
                         title: 'Create table'
                     },
                     {
-                        status: Status.PENDING,
+                        status: Status.DONE,
                         title: 'Insert 2024 events'
                     }
                 ]
@@ -81,14 +75,14 @@ export const milestones: Milestone[] = [
             {
                 title: 'Add 2024 qualifying and hyperpole sessions',
                 type: FeatType.DATABASE,
-                status: Status.PENDING,
+
                 tasks: [
                     {
-                        status: Status.PENDING,
+                        status: Status.DEVELOP,
                         title: 'merge different classses if separated'
                     },
                     {
-                        status: Status.PENDING,
+                        status: Status.DEVELOP,
                         title: 'create tables and insert data'
                     }
                 ]
@@ -96,18 +90,17 @@ export const milestones: Milestone[] = [
             {
                 title: 'Get session details',
                 type: FeatType.BACKEND,
-                status: Status.PENDING,
+
                 tasks: [
                     {
                         status: Status.PENDING,
-                        title: 'Prepare endpoint that will allow filters'
+                        title: 'Prepare endpoint that will allow retrieve data using filters'
                     }
                 ]
             },
             {
                 title: 'Get data to fill filters',
                 type: FeatType.BACKEND,
-                status: Status.PENDING,
                 tasks: [
                     {
                         status: Status.PENDING,
@@ -138,7 +131,6 @@ export const milestones: Milestone[] = [
             {
                 title: 'Filters on Tempo page',
                 type: FeatType.FRONTEND,
-                status: Status.PENDING,
                 tasks: [
                     {
                         status: Status.PENDING,
@@ -153,7 +145,6 @@ export const milestones: Milestone[] = [
             {
                 title: 'Tempo page',
                 type: FeatType.FRONTEND,
-                status: Status.PENDING,
                 tasks: [
                     {
                         status: Status.PENDING,

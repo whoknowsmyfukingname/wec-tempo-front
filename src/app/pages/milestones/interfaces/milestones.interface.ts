@@ -1,7 +1,6 @@
 export interface Milestone {
     position: number;
     title: string;
-    status: Status;
     completedDate?: Date
     features: Feature[];
 }
@@ -9,7 +8,6 @@ export interface Milestone {
 export interface Feature {
     title: string;
     type: FeatType;
-    status: Status;
     tasks: Task[];
 }
 
