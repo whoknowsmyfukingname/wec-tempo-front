@@ -8,12 +8,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 const mockMilestones: Milestone[] = [
       {
         position: 0,
-        status: Status.DEVELOP,
         title: 'mile_1',
         features: [
           {
             title: 'feat_1',
-            status: Status.DEVELOP,
             type: FeatType.BACKEND,
             tasks: [
               {
@@ -28,7 +26,6 @@ const mockMilestones: Milestone[] = [
           },
           {
             title: 'feat_2',
-            status: Status.DEVELOP,
             type: FeatType.BACKEND,
             tasks: [
               {
