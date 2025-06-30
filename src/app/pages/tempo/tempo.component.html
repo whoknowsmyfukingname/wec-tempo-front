@@ -1,1 +1,7 @@
-<p>tempo works!</p>
+<form [formGroup]="filtersForm">
+    <p-select formControlName="year" (onChange)="onChangeYear()" [options]="yearsOptions" placeholder="Year"></p-select>
+    <p-select formControlName="event" (onChange)="onChangeEvent()" [options]="eventOptions" placeholder="Event"></p-select>
+    <p-select formControlName="session" (onChange)="onChangeSession()" [options]="sessionOptions" placeholder="Session"></p-select>
+    <p-select formControlName="category" (onChange)="onChangeCategory()" [options]="categoryOptions" placeholder="Category"></p-select>
+    <p-select formControlName="category" (onChange)="onChangeParticipant()" [options]="participantOptions" placeholder="Participant"></p-select>
+</form>
