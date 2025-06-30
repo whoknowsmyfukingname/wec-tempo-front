@@ -2,7 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { EventResponseInterface, ParticipantsBodyInterface, SessionsCategoriesBodyInterface, TempoBodyInterface } from '../interfaces/filters.interface';
+import { EventResponseInterface, ParticipantsBodyInterface, SessionsCategoriesBodyInterface } from '../interfaces/filters.interface';
+import { TempoBodyInterface, TempoResponseInterface } from '../interfaces/tempo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +39,9 @@ export class TempoService {
     )
   }
 
-  getTempo(eventId: string, session: string, participant: string) {
+  getTempo(eventId: string, session: string, participant: string): Observable<TempoResponseInterface[]> {
     const url: string = `${this.baseUrl}/tempo/data`;
     const body: TempoBodyInterface = { eventId, participant, session };
-    // TODO: response interface
-    return this.http.post<any>(url, body)
+    return this.http.post<TempoResponseInterface[]>(url, body)
   }
 }

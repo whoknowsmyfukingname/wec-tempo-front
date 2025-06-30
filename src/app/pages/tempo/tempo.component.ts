@@ -1,8 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { TempoService } from './service/tempo.service';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { SelectModule } from 'primeng/select';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { TempoChartInterface, TempoResponseInterface } from './interfaces/tempo.interface';
+import { ChartModule } from 'primeng/chart';
 
 interface FilterSelectorInterface {
   label: string;
@@ -11,7 +14,7 @@ interface FilterSelectorInterface {
 
 @Component({
   selector: 'app-tempo',
-  imports: [SelectModule, ReactiveFormsModule],
+  imports: [SelectModule, ReactiveFormsModule, TableModule, ChartModule],
   providers: [TempoService],
   templateUrl: './tempo.component.html',
   styleUrl: './tempo.component.scss'
@@ -23,7 +26,14 @@ export class TempoComponent implements OnInit, OnDestroy {
   sessionOptions: FilterSelectorInterface[] = [];
   // TODO: participants: create new table with participants per season??
   categoryOptions: FilterSelectorInterface[] = [];
-  participantOptions: string[] = []
+  participantOptions: string[] = [];
+
+  // tempoTable: TempoResponseInterface[] = [];
+  tempoTable = signal<TempoResponseInterface[]>([]);
+  tempoChart = signal<TempoChartInterface>({
+    datasets: [],
+    labels: []
+  });
 
   filtersForm = new FormGroup({
     year: new FormControl(),
@@ -70,7 +80,7 @@ export class TempoComponent implements OnInit, OnDestroy {
       sessions: this.tempoService.getDataByEvent(year, eventId, true),
       categories: this.tempoService.getDataByEvent(year, eventId, false)
     }).pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.sessionOptions = res.sessions.map(session => {
+      this.sessionOptions = res.sessions.filter(session => session === 'r').map(session => {
         return {
           label: this.getSessionLabel(session),
           value: session
@@ -109,7 +119,19 @@ export class TempoComponent implements OnInit, OnDestroy {
     this.tempoService.getTempo(eventId, session, participant).pipe(
       takeUntil(this.destroy$)
     ).subscribe(tempo => {
-      console.log({ tempo });
+      this.tempoTable.set(tempo.sort((a,b) => a.lapNumber - b.lapNumber));
+      this.tempoChart.set({
+        labels: tempo.map(dataToLabel => `${dataToLabel.lapNumber}`),
+        datasets: [
+          {
+            data: tempo.map(dataToDataset => dataToDataset.lapTime),
+            borderColor: '#c2c2c2',
+            fill: true,
+            label: participant,
+            tension: 0.4
+          }
+        ]
+      })
     })
   }
 

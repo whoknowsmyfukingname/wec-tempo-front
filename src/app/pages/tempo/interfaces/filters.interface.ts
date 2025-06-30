@@ -18,9 +18,3 @@ export interface ParticipantsBodyInterface {
     eventId: string;
     category: string;
 }
-
-export interface TempoBodyInterface {
-    eventId: string;
-    session: string
-    participant: string;
-}

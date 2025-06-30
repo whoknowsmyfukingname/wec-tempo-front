@@ -1,7 +1,51 @@
 <form [formGroup]="filtersForm">
     <p-select formControlName="year" (onChange)="onChangeYear()" [options]="yearsOptions" placeholder="Year"></p-select>
-    <p-select formControlName="event" (onChange)="onChangeEvent()" [options]="eventOptions" placeholder="Event"></p-select>
-    <p-select formControlName="session" (onChange)="onChangeSession()" [options]="sessionOptions" placeholder="Session"></p-select>
-    <p-select formControlName="category" (onChange)="onChangeCategory()" [options]="categoryOptions" placeholder="Category"></p-select>
-    <p-select formControlName="category" (onChange)="onChangeParticipant()" [options]="participantOptions" placeholder="Participant"></p-select>
+    <p-select formControlName="event" (onChange)="onChangeEvent()" [options]="eventOptions"
+        placeholder="Event"></p-select>
+    <p-select formControlName="session" (onChange)="onChangeSession()" [options]="sessionOptions"
+        placeholder="Session"></p-select>
+    <p-select formControlName="category" (onChange)="onChangeCategory()" [options]="categoryOptions"
+        placeholder="Category"></p-select>
+    <p-select formControlName="participant" (onChange)="onChangeParticipant()" [options]="participantOptions"
+        placeholder="Participant"></p-select>
 </form>
+
+@if (tempoChart().datasets.length > 0) {
+    <div class="card">
+        <!-- TODO: options -->
+        <p-chart type="line" [data]="tempoChart()" />
+    </div>
+}
+
+@if (tempoTable().length > 0) {
+<p-table [value]="tempoTable()">
+    <ng-template #header>
+        <tr>
+            <th>elapsed</th>
+            <th>lapTime</th>
+            <th>lapNumber</th>
+            <th>sector1</th>
+            <th>sector2</th>
+            <th>sector3</th>
+            <th>averageSpeed</th>
+            <th>driverName</th>
+            <th>isInPits</th>
+            <th>pitTime</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-tempo>
+        <tr>
+            <td>{{ tempo.elapsed }}</td>
+            <td>{{ tempo.lapTime }}</td>
+            <td>{{ tempo.lapNumber }}</td>
+            <td>{{ tempo.sector1 }}</td>
+            <td>{{ tempo.sector2 }}</td>
+            <td>{{ tempo.sector3 }}</td>
+            <td>{{ tempo.averageSpeed }}</td>
+            <td>{{ tempo.driverName }}</td>
+            <td>{{ tempo.isInPits }}</td>
+            <td>{{ tempo.pitTime }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+}
