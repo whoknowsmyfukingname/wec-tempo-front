@@ -4,7 +4,6 @@ import { providePrimeNG } from 'primeng/config';
 
 import PurplePreset from '../styles/purple.preset';
 import { provideHttpClient } from '@angular/common/http';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +14,6 @@ export const appConfig: ApplicationConfig = {
         preset: PurplePreset
       }
     }),
-    provideHttpClient(), provideClientHydration(withEventReplay())
+    provideHttpClient()
   ]
 };

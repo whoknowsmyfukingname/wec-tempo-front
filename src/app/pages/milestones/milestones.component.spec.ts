@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MilestonesComponent } from './milestones.component';
 import { Milestone, FeatType, Status } from './interfaces/milestones.interface';
-import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const mockMilestones: Milestone[] = [
@@ -50,7 +49,6 @@ describe('MilestonesComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MilestonesComponent],
       providers: [
-        provideRouter([]),
         provideAnimationsAsync()
       ]
     })
