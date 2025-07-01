@@ -1,7 +1,11 @@
 <div class="px-1 flex flex-col h-screen">
     <app-header></app-header>
     <div class="grow-1">
-        <router-outlet></router-outlet>
+        @if (currentTab() === 'tempo') {
+            <app-tempo></app-tempo>
+        } @else {
+            <app-milestones></app-milestones>
+        }
     </div>
     <app-footer></app-footer>
 </div>

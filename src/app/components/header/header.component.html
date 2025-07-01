@@ -1,10 +1,8 @@
 <div class="dark-background flex items-center justify-center pe-4 rounded-b-xl">
     <img src="images/wec-tempo-early.png" alt="wec-tempo-icon" width="100px" />
     <div class="grow-1 flex justify-center gap-4">
-        <a routerLink="/milestones">Milestones</a>
-        <a routerLink="/tempo">Tempo</a>
+        <a class="tab" (click)="onChangeTab('milestones')">Milestones</a>
+        <a class="tab" (click)="onChangeTab('tempo')">Tempo</a>
     </div>
-    <!-- TODO: decide which one to use -->
-    <!-- <p-avatar styleClass="mr-2" size="large" shape="circle" image="images/jiji.png" /> -->
     <p-avatar styleClass="mr-2" size="large" shape="circle" image="images/db_13_tempo.png" />
 </div>
