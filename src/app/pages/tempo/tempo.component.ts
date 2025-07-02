@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { TempoChartInterface, TempoResponseInterface } from './interfaces/tempo.interface';
 import { ChartModule } from 'primeng/chart';
+import { TooltipModule } from 'primeng/tooltip';
 
 interface FilterSelectorInterface {
   label: string;
@@ -14,7 +15,7 @@ interface FilterSelectorInterface {
 
 @Component({
   selector: 'app-tempo',
-  imports: [SelectModule, ReactiveFormsModule, TableModule, ChartModule],
+  imports: [SelectModule, ReactiveFormsModule, TableModule, ChartModule, TooltipModule],
   providers: [TempoService],
   templateUrl: './tempo.component.html',
   styleUrl: './tempo.component.scss'
@@ -56,6 +57,10 @@ export class TempoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getTempoDriverName(row: TempoResponseInterface): string[] {
+    return row.driverName.split(' ');
   }
 
   onChangeYear() {
@@ -119,7 +124,7 @@ export class TempoComponent implements OnInit, OnDestroy {
     this.tempoService.getTempo(eventId, session, participant).pipe(
       takeUntil(this.destroy$)
     ).subscribe(tempo => {
-      this.tempoTable.set(tempo.sort((a,b) => a.lapNumber - b.lapNumber));
+      this.tempoTable.set(tempo.sort((a, b) => a.lapNumber - b.lapNumber));
       this.tempoChart.set({
         labels: tempo.map(dataToLabel => `${dataToLabel.lapNumber}`),
         datasets: [
@@ -160,6 +165,18 @@ export class TempoComponent implements OnInit, OnDestroy {
       default:
         return '';
     }
+  }
+
+  formatLaptime(ms: number): string {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    const milliseconds = ms % 1000;
+
+    // Pad seconds and milliseconds with leading zeros if needed
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+    const formattedMilliseconds = milliseconds.toString().padStart(3, '0');
+
+    return `${minutes}:${formattedSeconds}.${formattedMilliseconds}`;
   }
 
 }

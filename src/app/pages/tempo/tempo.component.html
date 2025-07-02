@@ -11,40 +11,41 @@
 </form>
 
 @if (tempoChart().datasets.length > 0) {
-    <div class="card">
-        <!-- TODO: options -->
-        <p-chart type="line" [data]="tempoChart()" />
-    </div>
+<div class="card">
+    <!-- TODO: options -->
+    <p-chart type="line" [data]="tempoChart()" />
+</div>
 }
 
 @if (tempoTable().length > 0) {
 <p-table [value]="tempoTable()">
     <ng-template #header>
         <tr>
-            <th>elapsed</th>
-            <th>lapTime</th>
-            <th>lapNumber</th>
-            <th>sector1</th>
-            <th>sector2</th>
-            <th>sector3</th>
-            <th>averageSpeed</th>
-            <th>driverName</th>
-            <th>isInPits</th>
-            <th>pitTime</th>
+            <th></th>
+            <th>Lap Number</th>
+            <th>Lap Time</th>
+            <th>Sector 1</th>
+            <th>Sector 2</th>
+            <th>Sector 3</th>
+            <th>Driver Name</th>
         </tr>
     </ng-template>
     <ng-template #body let-tempo>
         <tr>
-            <td>{{ tempo.elapsed }}</td>
-            <td>{{ tempo.lapTime }}</td>
+            <td>
+                @if (tempo.isInPits && tempo.isInPits === 1) {
+                <span pTooltip="Car in pits" tooltipPosition="right" class="pi pi-wrench"></span>
+                }
+            </td>
             <td>{{ tempo.lapNumber }}</td>
+            <td>{{ formatLaptime(tempo.lapTime) }}</td>
             <td>{{ tempo.sector1 }}</td>
             <td>{{ tempo.sector2 }}</td>
             <td>{{ tempo.sector3 }}</td>
-            <td>{{ tempo.averageSpeed }}</td>
-            <td>{{ tempo.driverName }}</td>
-            <td>{{ tempo.isInPits }}</td>
-            <td>{{ tempo.pitTime }}</td>
+            <td class="flex gap-2">
+                <span>{{ getTempoDriverName(tempo).at(0) }}</span>
+                <strong>{{ getTempoDriverName(tempo).at(1) }}</strong>
+            </td>
         </tr>
     </ng-template>
 </p-table>
